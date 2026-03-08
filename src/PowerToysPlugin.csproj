@@ -48,8 +48,6 @@
     <EmbeddedResource Include="Resources\Icons\Awake.png" />
     <None Remove="Resources\Icons\NewPlus.png" />
     <EmbeddedResource Include="Resources\Icons\NewPlus.png" />
-    <None Remove="Resources\Icons\MouseCrosshairs.png" />
-    <EmbeddedResource Include="Resources\Icons\MouseCrosshairs.png" />
     <None Remove="Resources\Icons\FileLocksmith.png" />
     <EmbeddedResource Include="Resources\Icons\FileLocksmith.png" />
     <None Remove="Resources\Icons\LightSwitch.png" />
@@ -102,6 +100,8 @@
     <EmbeddedResource Include="Resources\Icons\ScreenRuler.png" />
     <None Remove="Resources\Icons\QuickAccent.png" />
     <EmbeddedResource Include="Resources\Icons\QuickAccent.png" />
+    <None Remove="Resources\Icons\MousePointerCrosshairs.png" />
+    <EmbeddedResource Include="Resources\Icons\MousePointerCrosshairs.png" />
   </ItemGroup>
 
   <Target Name="CopyPackage" AfterTargets="PostBuildEvent">
