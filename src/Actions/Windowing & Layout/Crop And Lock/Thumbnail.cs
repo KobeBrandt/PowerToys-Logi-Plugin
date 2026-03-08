@@ -2,5 +2,5 @@
 
 public class Thumbnail: PowerToy
 {
-    public Thumbnail() : base("Thumbnail", "Thumbnail", "Windows+CTRL+SHIFT+KeyT", "Windowing & Layout", "CropAndLock") { }
+    public Thumbnail() : base("Thumbnail", "Thumbnail", "Windows+CTRL+SHIFT+KeyT", "Windowing & Layout","Crop And Lock", "CropAndLock") { }
 }

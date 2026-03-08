@@ -2,5 +2,5 @@
 
 public class Reparent: PowerToy
 {
-    public Reparent() : base("Reparent", "Reparent", "Windows+CTRL+SHIFT+KeyR", "Windowing & Layout", "CropAndLock") { }
+    public Reparent() : base("Reparent", "Reparent", "Windows+CTRL+SHIFT+KeyR", "Windowing & Layout","Crop And Lock", "CropAndLock") { }
 }

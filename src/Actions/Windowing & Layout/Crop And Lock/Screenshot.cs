@@ -2,5 +2,5 @@
 
 public class Screenshot: PowerToy
 {
-    public Screenshot() : base("Screenshot", "Screenshot", "Windows+CTRL+SHIFT+KeyS", "Windowing & Layout", "CropAndLock") { }
+    public Screenshot() : base("Screenshot", "Screenshot", "Windows+CTRL+SHIFT+KeyS", "Windowing & Layout","Crop And Lock", "CropAndLock") { }
 }

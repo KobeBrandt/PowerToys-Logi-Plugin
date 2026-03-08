@@ -13,12 +13,18 @@
         private readonly String _Icon;
         private String image;
         
-        public PowerToy(String name, String displayname, String shortcut, String groupname = null, String icon = null)
+        public PowerToy(String name, String displayName, String shortcut, String groupName = null, String extraGroupName = null, String icon = null)
         {
             this._Name = name;
             this._DefaultShortcut = shortcut;
-            this.DisplayName = displayname;
-            this.GroupName = groupname;
+            this.DisplayName = displayName;
+            this.GroupName = groupName;
+            if (extraGroupName != null)
+            {
+                this.GroupName+= "###" + extraGroupName;
+            }
+
+            
             if (icon != null)
             {
                 this._Icon = icon;
@@ -28,7 +34,7 @@
                 this._Icon = name;
             }
 
-            this.Description = "Activate the PowerToy for " + displayname + ".\n(Leave blank for the default shortcut)";
+            this.Description = "Activate the PowerToy for " + displayName + ".\n(Leave blank for the default shortcut)";
             
 
             // Add controls for user configuration
@@ -41,7 +47,7 @@
             // Subscribe to events
             this.ActionEditor.ControlValueChanged += this.OnControlValueChanged;
         }
-        
+
         protected override BitmapImage GetCommandImage(ActionEditorActionParameters actionParameters, int imageWidth, int imageHeight)
         {
             try
@@ -58,7 +64,7 @@
 
         private void OnControlValueChanged(Object sender, ActionEditorControlValueChangedEventArgs e)
         {
-            this.ActionImageChanged();
+            
         }
         protected override Boolean RunCommand(ActionEditorActionParameters actionParameters)
         {

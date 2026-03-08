@@ -52,6 +52,11 @@
             {
                 return ' ';
             } 
+            Match matchSlash = Regex.Match(shortcut, @"Key/");
+            if (matchSlash.Success)
+            {
+                return '/';
+            } 
             return '⍼';
         }
 
