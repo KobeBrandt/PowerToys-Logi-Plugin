@@ -2,5 +2,5 @@
 
 public class QuickAccent: PowerToy
 {
-    public QuickAccent() : base("QuickAccent", "Quick Accent", "ArrowRight", "System Tools") { }
+    public QuickAccent() : base("QuickAccent", "Quick Accent", "ArrowRight", "Input & Output") { }
 }
