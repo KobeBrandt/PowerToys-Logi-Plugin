@@ -52,19 +52,8 @@
             {
                 PluginLog.Error(e, "Failed to find image");
             }
-            
-            PluginLog.Info("Setting image " + this.image);
-            try
-            {
-                return EmbeddedResources.ReadImage(
-                    this.image
-                );
-            }
-            catch (Exception e)
-            {
-                PluginLog.Error(e, "Failed to read image");
-                return null;
-            }
+
+            return BitmapHelper.MakeBitmapImage(this.image, imageWidth, imageHeight);
         }
 
         private void OnControlValueChanged(Object sender, ActionEditorControlValueChangedEventArgs e)
