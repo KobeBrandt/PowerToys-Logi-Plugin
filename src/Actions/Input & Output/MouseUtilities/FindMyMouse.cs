@@ -36,17 +36,24 @@ public class FindMyMouse: ActionEditorCommand
     {
         if (actionParameters.TryGetString("ControlsSelector", out var trigger))
         {
-            // switch (trigger)
-            // {
-            //     case "LeftControlTwice":
-            //         this.Plugin.ClientApplication.SendKeyboardShortcut( VirtualKeyCode.ControlLeft);
-            //         break;
-            //     case "RightControlTwice":
-            //         this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.ControlRight);
-            //         break;
-            //     case "CustomShortcut":
-            //         break;
-            // }
+            switch (trigger)
+            {
+                case "LeftControlTwice":
+                    PluginLog.Info("Left Control Twice");
+                    this.Plugin.ClientApplication.SendKeyboardShortcut( VirtualKeyCode.ControlLeft, ModifierKey.Control);
+                    Thread.Sleep(100);
+                    this.Plugin.ClientApplication.SendKeyboardShortcut( VirtualKeyCode.ControlLeft, ModifierKey.Control);
+                    break;
+                case "RightControlTwice":
+                    PluginLog.Info("Right Control Twice");
+                    this.Plugin.ClientApplication.SendKeyboardShortcut( VirtualKeyCode.ControlRight, ModifierKey.Control);
+                    Thread.Sleep(100);
+                    this.Plugin.ClientApplication.SendKeyboardShortcut( VirtualKeyCode.ControlRight, ModifierKey.Control);
+                    break;
+                case "CustomShortcut":
+                    PluginLog.Info("Custom Shortcut");
+                    break;
+            }
 
             return true;
         }
