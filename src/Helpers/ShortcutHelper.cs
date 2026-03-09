@@ -40,7 +40,7 @@
 
         public static char GetChar(String shortcut)
         {
-            Match matchKey = Regex.Match(shortcut, @"Key([A-Z])");
+            Match matchKey = Regex.Match(shortcut, @"Key([A-Z`])");
             if (matchKey.Success)
             {
                 char key = matchKey.Groups[1].Value[0];
