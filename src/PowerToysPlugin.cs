@@ -25,11 +25,21 @@ namespace Loupedeck.PowerToysPlugin
         // This method is called when the plugin is loaded.
         public override void Load()
         {
+            if (IsPowerToysRunning())
+            {
+                this.OnPluginStatusChanged(Loupedeck.PluginStatus.Normal, "Open the application.");
+            }
+            else
+            {
+                this.OnPluginStatusChanged(Loupedeck.PluginStatus.Error, "PowerToys not running");
+            }
         }
 
         // This method is called when the plugin is unloaded.
         public override void Unload()
         {
         }
+        private static Boolean IsPowerToysRunning()
+            => System.Diagnostics.Process.GetProcessesByName("PowerToys").Length > 0;
     }
 }
