@@ -12,13 +12,13 @@ name: PowerToys
 displayName: PowerToys
 
 # Short description of the plugin.
-description: A plugin that executes the PowerToys shortcuts.
+description: A unofficial plugin that executes the PowerToys shortcuts.
 
 # Name of the plugin library file.
 pluginFileName: PowerToysPlugin.dll
 
 # Plugin version.
-version: 0.2
+version: 1.0
 
 # Author of the plugin. The author can be a company or an individual developer.
 author: KBrandt.dev

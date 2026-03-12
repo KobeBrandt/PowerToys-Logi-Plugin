@@ -34,14 +34,13 @@
                 this._Icon = name;
             }
 
-            this.Description = "Activate the PowerToy for " + displayName + ".\n(Leave blank for the default shortcut)";
+            this.Description = "Activate the PowerToy for " + displayName + ".";
             
 
             // Add controls for user configuration
             this.ActionEditor.AddControlEx(
-               new ActionEditorKeyboardKey(name: "CustomShortcut", labelText: "Shortcut:")
-                 .SetBehavior(ActionEditorKeyboardKeyBehavior.KeyboardKey));
-
+                new ActionEditorKeyboardKey(name: "CustomShortcut", labelText: "Leave blank for default")
+                    .SetBehavior(ActionEditorKeyboardKeyBehavior.KeyboardKey));
             
             
             // Subscribe to events
