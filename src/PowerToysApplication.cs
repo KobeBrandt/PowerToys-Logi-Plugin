@@ -1,22 +1,15 @@
-namespace Loupedeck.PowerToysPlugin
+namespace Loupedeck.PowerToysPlugin;
+
+// This class can be used to connect the Loupedeck plugin to an application.
+
+public class PowerToysApplication : ClientApplication
 {
-    using System;
+    // This method can be used to link the plugin to a Windows application.
+    protected override String GetProcessName() => "";
 
-    // This class can be used to connect the Loupedeck plugin to an application.
+    // This method can be used to link the plugin to a macOS application.
+    protected override String GetBundleName() => "";
 
-    public class PowerToysApplication : ClientApplication
-    {
-        public PowerToysApplication()
-        {
-        }
-
-        // This method can be used to link the plugin to a Windows application.
-        protected override String GetProcessName() => "";
-
-        // This method can be used to link the plugin to a macOS application.
-        protected override String GetBundleName() => "";
-
-        // This method can be used to check whether the application is installed or not.
-        public override ClientApplicationStatus GetApplicationStatus() => ClientApplicationStatus.Unknown;
-    }
+    // This method can be used to check whether the application is installed or not.
+    public override ClientApplicationStatus GetApplicationStatus() => ClientApplicationStatus.Unknown;
 }

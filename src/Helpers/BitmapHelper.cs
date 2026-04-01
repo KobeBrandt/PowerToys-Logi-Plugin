@@ -4,9 +4,9 @@ public static class BitmapHelper
 {
     public static BitmapImage MakeBitmapImage(String path, Int32 imageWidth, Int32 imageHeight)
     {
-        double scale = 3.5;
-        double imageSizeDouble = imageWidth * scale;
-        int imageSize = (int)imageSizeDouble;
+        var scale = 3.5;
+        var imageSizeDouble = imageWidth * scale;
+        var imageSize = (Int32)imageSizeDouble;
         try
         {
             using var builder = new BitmapBuilder(imageSize, imageSize);

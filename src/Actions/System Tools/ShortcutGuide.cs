@@ -2,7 +2,7 @@
 
 using global::PowerToysPlugin;
 
-public class ShortcutGuide: PowerToy
+public class ShortcutGuide : PowerToy
 {
     public ShortcutGuide() : base("ShortcutGuide", "Shortcut Guide", "Win+SHIFT+Key/", "System Tools") { }
 }
