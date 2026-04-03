@@ -77,6 +77,6 @@ public class FindMyMouse : ActionEditorCommand
             PluginLog.Error(e, "Failed to find image");
         }
 
-        return BitmapHelper.MakeBitmapImage(image, imageWidth, imageHeight);
+        return BitmapHelper.MakeBitmapImage(image, imageWidth);
     }
 }

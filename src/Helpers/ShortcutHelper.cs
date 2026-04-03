@@ -1,6 +1,9 @@
 ﻿namespace Loupedeck.PowerToysPlugin.Helpers;
 
+using System;
+using System.Linq;
 using System.Text.RegularExpressions;
+using Loupedeck;
 
 public static class ShortcutHelper
 {
@@ -36,11 +39,11 @@ public static class ShortcutHelper
 
     public static Char GetChar(String shortcut)
     {
-        var matchKey = Regex.Match(shortcut, @"Key([A-Z`1-9!@#$%^&*])");
+        var matchKey = Regex.Match(shortcut, @"Key(.)");
         if (matchKey.Success)
         {
             var key = matchKey.Groups[1].Value[0];
-            return key.ToLower();
+            return char.ToLower(key);
         }
 
         var matchSpace = Regex.Match(shortcut, @"Space");
@@ -49,27 +52,29 @@ public static class ShortcutHelper
             return ' ';
         }
 
-        var matchSlash = Regex.Match(shortcut, @"Key/");
-        if (matchSlash.Success)
-        {
-            return '/';
-        }
-
         return '⍼';
     }
 
     public static VirtualKeyCode GetVirtualKeyCode(String shortcut)
     {
-        var matchArrowLeft = Regex.Match(shortcut, @"ArrowLeft");
-        if (matchArrowLeft.Success)
+        if (shortcut.Contains("ArrowLeft"))
         {
             return VirtualKeyCode.ArrowLeft;
         }
 
-        var matchArrowRicht = Regex.Match(shortcut, @"ArrowRigh");
-        if (matchArrowRicht.Success)
+        if (shortcut.Contains("ArrowRight"))
         {
             return VirtualKeyCode.ArrowRight;
+        }
+
+        if (shortcut.Contains("ArrowUp"))
+        {
+            return VirtualKeyCode.ArrowUp;
+        }
+
+        if (shortcut.Contains("ArrowDown"))
+        {
+            return VirtualKeyCode.ArrowDown;
         }
 
         return VirtualKeyCode.None;
