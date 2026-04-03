@@ -2,14 +2,13 @@
 
 public static class BitmapHelper
 {
-    public static BitmapImage MakeBitmapImage(String path, Int32 imageWidth, Int32 imageHeight)
+    public static BitmapImage MakeBitmapImage(String path, Int32 imageSize)
     {
-        var scale = 3.5;
-        var imageSizeDouble = imageWidth * scale;
-        var imageSize = (Int32)imageSizeDouble;
+        var scale = 2;
+        var size = (Int32)(imageSize * scale);
         try
         {
-            using var builder = new BitmapBuilder(imageSize, imageSize);
+            using var builder = new BitmapBuilder(size, size);
             builder.DrawImage(EmbeddedResources.ReadImage(path));
             return builder.ToImage();
         }
