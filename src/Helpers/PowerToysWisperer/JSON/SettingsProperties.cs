@@ -32,5 +32,8 @@ public class SettingsProperties
     public SettingValue<ActivationShortcut> ToggleThemeHotkey { get; set; }
     
     [JsonPropertyName("open_powerlauncher")]
-    public SettingValue<ActivationShortcut> open_powerlauncher { get; set; }
+    public ActivationShortcut open_powerlauncher { get; set; }
+
+    [JsonPropertyName("DefaultOpenPowerLauncher")]
+    public ActivationShortcut DefaultOpenPowerLauncher { get; set; }
 }

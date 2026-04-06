@@ -28,7 +28,7 @@ public static class PowerToysConnector
             }
             else if (name == "ScreenRuler")
             {
-                settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "MeasureTool", "settings.json");
+                settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "Measure Tool", "settings.json");
             }
             else if (name == "MouseHighlighter" || name == "MousePointerCrosshairs" || name == "MouseJump" || name == "CursorWrap")
             {
@@ -67,12 +67,38 @@ public static class PowerToysConnector
                         shortcutObj = v.Deserialize<ActivationShortcut>();
                 }
             }
-            else if (name == "PowerToysRun" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+            else if (name == "PowerToysRun")
             {
-                if (settings.Properties.ActivationShortcut.TryGetProperty("open_powerlauncher", out var val))
+                if (settings?.Properties?.open_powerlauncher != null)
                 {
-                    if (val.TryGetProperty("value", out var v))
-                        shortcutObj = v.Deserialize<ActivationShortcut>();
+                    shortcutObj = settings.Properties.open_powerlauncher;
+                }
+                else if (settings?.Properties?.DefaultOpenPowerLauncher != null)
+                {
+                    shortcutObj = settings.Properties.DefaultOpenPowerLauncher;
+                }
+                else
+                {
+                    var doc = JsonDocument.Parse(jsonContent);
+                    if (doc.RootElement.TryGetProperty("properties", out var props))
+                    {
+                        if (props.TryGetProperty("open_powerlauncher", out var pl))
+                        {
+                            shortcutObj = pl.Deserialize<ActivationShortcut>();
+                        }
+                        else if (props.TryGetProperty("DefaultOpenPowerLauncher", out var dpl))
+                        {
+                            shortcutObj = dpl.Deserialize<ActivationShortcut>();
+                        }
+                        else if (props.TryGetProperty("ActivationShortcut", out var act) && act.ValueKind == JsonValueKind.Object)
+                        {
+                            if (act.TryGetProperty("open_powerlauncher", out var val))
+                            {
+                                if (val.TryGetProperty("value", out var v))
+                                    shortcutObj = v.Deserialize<ActivationShortcut>();
+                            }
+                        }
+                    }
                 }
             }
             else if (name == "Screenshot" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
