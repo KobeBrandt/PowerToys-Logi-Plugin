@@ -30,6 +30,10 @@ public static class PowerToysConnector
             {
                 settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "Measure Tool", "settings.json");
             }
+            else if (name == "ShortcutGuide")
+            {
+                settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "Shortcut Guide", "settings.json");
+            }
             else if (name == "MouseHighlighter" || name == "MousePointerCrosshairs" || name == "MouseJump" || name == "CursorWrap")
             {
                 settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "MouseUtils", "settings.json");
@@ -129,6 +133,17 @@ public static class PowerToysConnector
                 if (settings?.Properties?.ToggleThemeHotkey?.Value != null)
                 {
                     shortcutObj = settings.Properties.ToggleThemeHotkey.Value;
+                }
+            }
+            else if (name == "ShortcutGuide")
+            {
+                if (settings?.Properties?.open_shortcutguide != null)
+                {
+                    shortcutObj = settings.Properties.open_shortcutguide;
+                }
+                else if (settings?.Properties?.DefaultOpenShortcutGuide != null)
+                {
+                    shortcutObj = settings.Properties.DefaultOpenShortcutGuide;
                 }
             }
             else if (name == "MouseHighlighter" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)

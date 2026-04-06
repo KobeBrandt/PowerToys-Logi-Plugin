@@ -36,4 +36,10 @@ public class SettingsProperties
 
     [JsonPropertyName("DefaultOpenPowerLauncher")]
     public ActivationShortcut DefaultOpenPowerLauncher { get; set; }
+
+    [JsonPropertyName("open_shortcutguide")]
+    public ActivationShortcut open_shortcutguide { get; set; }
+
+    [JsonPropertyName("DefaultOpenShortcutGuide")]
+    public ActivationShortcut DefaultOpenShortcutGuide { get; set; }
 }
