@@ -42,4 +42,10 @@ public class SettingsProperties
 
     [JsonPropertyName("DefaultOpenShortcutGuide")]
     public ActivationShortcut DefaultOpenShortcutGuide { get; set; }
+
+    [JsonPropertyName("reparent-hotkey")]
+    public SettingValue<ActivationShortcut> ReparentHotkey { get; set; }
+
+    [JsonPropertyName("thumbnail-hotkey")]
+    public SettingValue<ActivationShortcut> ThumbnailHotkey { get; set; }
 }

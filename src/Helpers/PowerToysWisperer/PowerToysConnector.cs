@@ -14,7 +14,7 @@ public static class PowerToysConnector
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             var settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", name, "settings.json");
 
-            if (name == "Reparent" || name == "Screenshot" || name == "Thumbnail")
+            if (name is "Reparent" or "Thumbnail")
             {
                 settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "CropAndLock", "settings.json");
             }
@@ -63,13 +63,13 @@ public static class PowerToysConnector
                         shortcutObj = v.Deserialize<ActivationShortcut>();
                 }
             }
-            else if (name == "Reparent" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+            else if (name == "Reparent" && settings?.Properties?.ReparentHotkey?.Value != null)
             {
-                if (settings.Properties.ActivationShortcut.TryGetProperty("ReparentHotkey", out var val))
-                {
-                    if (val.TryGetProperty("value", out var v))
-                        shortcutObj = v.Deserialize<ActivationShortcut>();
-                }
+                shortcutObj = settings.Properties.ReparentHotkey.Value;
+            }
+            else if (name == "Thumbnail" && settings?.Properties?.ThumbnailHotkey?.Value != null)
+            {
+                shortcutObj = settings.Properties.ThumbnailHotkey.Value;
             }
             else if (name == "PowerToysRun")
             {
