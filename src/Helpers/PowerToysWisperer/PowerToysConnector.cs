@@ -204,12 +204,19 @@ public static class PowerToysConnector
                         shortcutObj = v.Deserialize<ActivationShortcut>();
                 }
             }
-            else if (name == "MouseJump" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+            else if (name == "MouseJump")
             {
-                if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))
+                if (settings?.Properties?.activation_shortcut != null)
                 {
-                    if (val.TryGetProperty("value", out var v))
-                        shortcutObj = v.Deserialize<ActivationShortcut>();
+                    shortcutObj = settings.Properties.activation_shortcut;
+                }
+                else if (settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+                {
+                    if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))
+                    {
+                        if (val.TryGetProperty("value", out var v))
+                            shortcutObj = v.Deserialize<ActivationShortcut>();
+                    }
                 }
             }
             else if (name == "CursorWrap" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
