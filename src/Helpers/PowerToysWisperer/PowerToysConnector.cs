@@ -146,6 +146,20 @@ public static class PowerToysConnector
                     shortcutObj = settings.Properties.DefaultOpenShortcutGuide;
                 }
             }
+            else if (name == "FancyZones")
+            {
+                var doc = JsonDocument.Parse(jsonContent);
+                if (doc.RootElement.TryGetProperty("properties", out var props))
+                {
+                    if (props.TryGetProperty("fancyzones_editor_hotkey", out var hotkey) && hotkey.ValueKind == JsonValueKind.Object)
+                    {
+                        if (hotkey.TryGetProperty("value", out var v))
+                        {
+                            shortcutObj = v.Deserialize<ActivationShortcut>();
+                        }
+                    }
+                }
+            }
             else if (name == "MouseHighlighter" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
             {
                 if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))
