@@ -17,7 +17,7 @@ public abstract class PowerToy : PluginDynamicCommand
         : base(displayName: displayName, description: "Activate the PowerToy for " + displayName + ".", groupName: groupName)
     {
         this._Name = name;
-        // this.defaultShortcut = shortcut;
+        this.defaultShortcut = shortcut;
         this.DisplayName = displayName;
         this.GroupName = groupName;
         if (extraGroupName != null)
@@ -36,9 +36,6 @@ public abstract class PowerToy : PluginDynamicCommand
         }
 
         this.Description = "Activate the PowerToy for " + displayName + ".";
-
-
-
     }
 
     protected override BitmapImage GetCommandImage(String actionParameter, PluginImageSize imageSize)
@@ -59,7 +56,11 @@ public abstract class PowerToy : PluginDynamicCommand
 
     protected override Boolean OnLoad()
     {
-        this.defaultShortcut = PowerToysConnector.GetShortcutFromSettings(this._Name);
+        var settingsShortcut = PowerToysConnector.GetShortcutFromSettings(this._Name);
+        if (!string.IsNullOrEmpty(settingsShortcut))
+        {
+            this.defaultShortcut = settingsShortcut;
+        }
         return true;
     }
 

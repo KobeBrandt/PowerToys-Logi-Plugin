@@ -15,4 +15,22 @@ public class SettingsProperties
 
     [JsonPropertyName("ActivationShortcut")]
     public System.Text.Json.JsonElement ActivationShortcut { get; set; }
+
+    [JsonPropertyName("advanced-paste-ui-hotkey")]
+    public ActivationShortcut AdvancedPasteUiHotkey { get; set; }
+
+    [JsonPropertyName("paste-as-plain-hotkey")]
+    public ActivationShortcut PasteAsPlainHotkey { get; set; }
+
+    [JsonPropertyName("paste-as-markdown-hotkey")]
+    public ActivationShortcut PasteAsMarkdownHotkey { get; set; }
+
+    [JsonPropertyName("paste-as-json-hotkey")]
+    public ActivationShortcut PasteAsJsonHotkey { get; set; }
+
+    [JsonPropertyName("toggle-theme-hotkey")]
+    public SettingValue<ActivationShortcut> ToggleThemeHotkey { get; set; }
+    
+    [JsonPropertyName("open_powerlauncher")]
+    public SettingValue<ActivationShortcut> open_powerlauncher { get; set; }
 }

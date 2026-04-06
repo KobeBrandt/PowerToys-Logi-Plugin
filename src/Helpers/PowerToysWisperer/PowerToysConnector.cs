@@ -13,6 +13,27 @@ public static class PowerToysConnector
             
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             var settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", name, "settings.json");
+
+            if (name == "Reparent" || name == "Screenshot" || name == "Thumbnail")
+            {
+                settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "CropAndLock", "settings.json");
+            }
+            else if (name == "CommandPalette")
+            {
+                settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "CommandPalette", "settings.json");
+            }
+            else if (name == "PowerToysRun")
+            {
+                settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "PowerToys Run", "settings.json");
+            }
+            else if (name == "ScreenRuler")
+            {
+                settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "MeasureTool", "settings.json");
+            }
+            else if (name == "MouseHighlighter" || name == "MousePointerCrosshairs" || name == "MouseJump" || name == "CursorWrap")
+            {
+                settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "MouseUtils", "settings.json");
+            }
             
             if (!File.Exists(settingsPath))
             {
@@ -29,6 +50,92 @@ public static class PowerToysConnector
             if (settings?.Properties?.Hotkey?.Value != null)
             {
                 shortcutObj = settings.Properties.Hotkey.Value;
+            }
+            else if (name == "Reparent" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+            {
+                if (settings.Properties.ActivationShortcut.TryGetProperty("ReparentHotkey", out var val))
+                {
+                    if (val.TryGetProperty("value", out var v))
+                        shortcutObj = v.Deserialize<ActivationShortcut>();
+                }
+            }
+            else if (name == "Reparent" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+            {
+                if (settings.Properties.ActivationShortcut.TryGetProperty("ReparentHotkey", out var val))
+                {
+                    if (val.TryGetProperty("value", out var v))
+                        shortcutObj = v.Deserialize<ActivationShortcut>();
+                }
+            }
+            else if (name == "PowerToysRun" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+            {
+                if (settings.Properties.ActivationShortcut.TryGetProperty("open_powerlauncher", out var val))
+                {
+                    if (val.TryGetProperty("value", out var v))
+                        shortcutObj = v.Deserialize<ActivationShortcut>();
+                }
+            }
+            else if (name == "Screenshot" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+            {
+                if (settings.Properties.ActivationShortcut.TryGetProperty("SnapshotHotkey", out var val))
+                {
+                    if (val.TryGetProperty("value", out var v))
+                        shortcutObj = v.Deserialize<ActivationShortcut>();
+                }
+            }
+            else if (name == "AdvancedPaste")
+            {
+                if (settings?.Properties?.AdvancedPasteUiHotkey != null)
+                {
+                    shortcutObj = settings.Properties.AdvancedPasteUiHotkey;
+                }
+                else if (settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+                {
+                    if (settings.Properties.ActivationShortcut.TryGetProperty("AdvancedPasteHotkey", out var val))
+                    {
+                        if (val.TryGetProperty("value", out var v))
+                            shortcutObj = v.Deserialize<ActivationShortcut>();
+                    }
+                }
+            }
+            else if (name == "LightSwitch")
+            {
+                if (settings?.Properties?.ToggleThemeHotkey?.Value != null)
+                {
+                    shortcutObj = settings.Properties.ToggleThemeHotkey.Value;
+                }
+            }
+            else if (name == "MouseHighlighter" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+            {
+                if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))
+                {
+                    if (val.TryGetProperty("value", out var v))
+                        shortcutObj = v.Deserialize<ActivationShortcut>();
+                }
+            }
+            else if (name == "MousePointerCrosshairs" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+            {
+                if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))
+                {
+                    if (val.TryGetProperty("value", out var v))
+                        shortcutObj = v.Deserialize<ActivationShortcut>();
+                }
+            }
+            else if (name == "MouseJump" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+            {
+                if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))
+                {
+                    if (val.TryGetProperty("value", out var v))
+                        shortcutObj = v.Deserialize<ActivationShortcut>();
+                }
+            }
+            else if (name == "CursorWrap" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
+            {
+                if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))
+                {
+                    if (val.TryGetProperty("value", out var v))
+                        shortcutObj = v.Deserialize<ActivationShortcut>();
+                }
             }
             else if (settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
             {
