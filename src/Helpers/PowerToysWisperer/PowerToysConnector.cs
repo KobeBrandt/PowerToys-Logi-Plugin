@@ -146,6 +146,31 @@ public static class PowerToysConnector
                     shortcutObj = settings.Properties.DefaultOpenShortcutGuide;
                 }
             }
+            else if (name == "QuickAccent")
+            {
+                var doc = JsonDocument.Parse(jsonContent);
+                if (doc.RootElement.TryGetProperty("properties", out var props))
+                {
+                    if (props.TryGetProperty("activation_key", out var actKey))
+                    {
+                        if (actKey.ValueKind == JsonValueKind.Object)
+                        {
+                            if (actKey.TryGetProperty("value", out var val))
+                            {
+                                shortcutObj = val.Deserialize<ActivationShortcut>();
+                            }
+                        }
+                        else if (actKey.ValueKind == JsonValueKind.Number && actKey.TryGetInt32(out var code) && code > 0)
+                        {
+                            shortcutObj = new ActivationShortcut { Code = code };
+                        }
+                        else if (actKey.ValueKind == JsonValueKind.Number && actKey.TryGetInt32(out var zeroCode) && zeroCode == 0)
+                        {
+                            shortcutObj = new ActivationShortcut { Code = 39 };
+                        }
+                    }
+                }
+            }
             else if (name == "FancyZones")
             {
                 var doc = JsonDocument.Parse(jsonContent);
