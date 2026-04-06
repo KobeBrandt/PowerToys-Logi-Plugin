@@ -1,82 +1,46 @@
-// namespace PowerToysPlugin.Input___Output.MouseUtilities;
-//
-// using Loupedeck;
-// using Loupedeck.PowerToysPlugin;
-// using Loupedeck.PowerToysPlugin.Helpers;
-//
-// public class FindMyMouse : ActionEditorCommand
-// {
-//     public FindMyMouse()
-//     {
-//         this.Name = "FindMyMouse";
-//         this.DisplayName = "Find My Mouse";
-//         this.GroupName = "Input & Output###Mouse Utilities";
-//
-//         this.Description = "Activate the PowerToy for Find My Mouse (Not jet supported)";
-//
-//         this.ActionEditor.AddControlEx(
-//             new ActionEditorListbox("ControlsSelector", "Activation method:"));
-//
-//         // Subscribe to events
-//         this.ActionEditor.ListboxItemsRequested += this.OnListboxItemsRequested;
-//     }
-//
-//     private void OnListboxItemsRequested(Object sender, ActionEditorListboxItemsRequestedEventArgs e)
-//     {
-//         if (e.ControlName.EqualsNoCase("ControlsSelector"))
-//         {
-//             e.AddItem("LeftControlTwice", "Press Left Control twice", "Not jet supported");
-//             e.AddItem("RightControlTwice", "Press Right Control twice", "Not jet supported");
-//             e.AddItem("CustomShortcut", "Custom shortcut", "Not jet supported");
-//
-//             e.SetSelectedItemName("LeftControlTwice");
-//         }
-//     }
-//
-//     protected override Boolean RunCommand(ActionEditorActionParameters actionParameters)
-//     {
-//         if (actionParameters.TryGetString("ControlsSelector", out var trigger))
-//         {
-//             switch (trigger)
-//             {
-//                 case "LeftControlTwice":
-//                     PluginLog.Info("Left Control Twice");
-//                     this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.ControlLeft, ModifierKey.Control);
-//                     Thread.Sleep(100);
-//                     this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.ControlLeft, ModifierKey.Control);
-//                     break;
-//                 case "RightControlTwice":
-//                     PluginLog.Info("Right Control Twice");
-//                     this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.ControlRight,
-//                         ModifierKey.Control);
-//                     Thread.Sleep(100);
-//                     this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.ControlRight,
-//                         ModifierKey.Control);
-//                     break;
-//                 case "CustomShortcut":
-//                     PluginLog.Info("Custom Shortcut");
-//                     break;
-//             }
-//
-//             return true;
-//         }
-//
-//         return false;
-//     }
-//
-//     protected override BitmapImage GetCommandImage(ActionEditorActionParameters actionParameters, Int32 imageWidth,
-//         Int32 imageHeight)
-//     {
-//         var image = "";
-//         try
-//         {
-//             image = PluginResources.FindFile("FindMyMouse.png");
-//         }
-//         catch (Exception e)
-//         {
-//             PluginLog.Error(e, "Failed to find image");
-//         }
-//
-//         return BitmapHelper.MakeBitmapImage(image);
-//     }
-// }
+namespace PowerToysPlugin.Input___Output.MouseUtilities;
+
+using Loupedeck;
+using Loupedeck.PowerToysPlugin;
+using Loupedeck.PowerToysPlugin.Helpers.PowerToysWisperer;
+
+public class FindMyMouse : PowerToy
+{
+    private Int32 _activationMethod;
+
+    public FindMyMouse()
+        : base(name: "FindMyMouse", displayName: "Find My Mouse", shortcut: "", groupName: "Input & Output###Mouse Utilities")
+    {
+    }
+
+    protected override Boolean OnLoad()
+    {
+        this._activationMethod = PowerToysConnector.GetActivationMethodFromSettings("FindMyMouse");
+        return base.OnLoad();
+    }
+
+    protected override void RunCommand(String actionParameters)
+    {
+        switch (this._activationMethod)
+        {
+            case 0:
+                PluginLog.Info($"Activation method: {this._activationMethod}");
+                this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.ControlLeft, ModifierKey.Control);
+                Thread.Sleep(100);
+                this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.ControlLeft, ModifierKey.Control);
+                break;
+            case 1:
+                this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.ControlRight, ModifierKey.Control);
+                Thread.Sleep(100);
+                this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.ControlRight, ModifierKey.Control);
+                break;
+            case 3:
+                var shortcut = PowerToysConnector.GetShortcutFromSettings("FindMyMouse");
+                if (!string.IsNullOrEmpty(shortcut))
+                {
+                    this.defaultShortcut = shortcut;
+                }
+                break;
+        }
+    }
+}

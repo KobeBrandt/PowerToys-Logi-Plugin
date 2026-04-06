@@ -6,6 +6,30 @@ using JSON;
 
 public static class PowerToysConnector
 {
+    public static Int32 GetActivationMethodFromSettings(String name)
+    {
+        try
+        {
+            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", name, "settings.json");
+
+            if (!File.Exists(settingsPath))
+            {
+                return 0;
+            }
+
+            var jsonContent = File.ReadAllText(settingsPath);
+            var settings = JsonSerializer.Deserialize<PowerToysSettings>(jsonContent);
+
+            return settings?.Properties?.activation_method?.Value ?? 0;
+        }
+        catch (Exception ex)
+        {
+            PluginLog.Error(ex, $"{name} | Failed to get activation method from settings");
+            return 0;
+        }
+    }
+
     public static String GetShortcutFromSettings(String name)
     {
         try
@@ -237,6 +261,14 @@ public static class PowerToysConnector
             else if (name == "CursorWrap" && settings?.Properties?.activation_shortcut != null)
             {
                 shortcutObj = settings.Properties.activation_shortcut;
+            }
+            else if (name == "FindMyMouse" && settings?.Properties?.activation_shortcut != null)
+            {
+                shortcutObj = settings.Properties.activation_shortcut;
+            }
+            else if (name == "FindMyMouse" && settings?.Properties?.DefaultActivationShortcut != null)
+            {
+                shortcutObj = settings.Properties.DefaultActivationShortcut;
             }
             else if (settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
             {

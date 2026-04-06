@@ -51,4 +51,10 @@ public class SettingsProperties
 
     [JsonPropertyName("activation_shortcut")]
     public ActivationShortcut activation_shortcut { get; set; }
+
+    [JsonPropertyName("DefaultActivationShortcut")]
+    public ActivationShortcut DefaultActivationShortcut { get; set; }
+
+    [JsonPropertyName("activation_method")]
+    public SettingValue<Int32> activation_method { get; set; }
 }

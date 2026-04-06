@@ -7,7 +7,7 @@ using Loupedeck.PowerToysPlugin.Helpers.PowerToysWisperer;
 
 public abstract class PowerToy : PluginDynamicCommand
 {
-    private String defaultShortcut;
+    protected String defaultShortcut;
     private readonly String _Icon;
     private readonly String _Name;
     private String image;
@@ -66,35 +66,40 @@ public abstract class PowerToy : PluginDynamicCommand
 
     protected override void RunCommand(String actionParameters)
     {
-            PluginLog.Info($"{this._Name} | Sending shortcut: {this.defaultShortcut}");
-            try
+
+        if (string.IsNullOrEmpty(this.defaultShortcut))
+        {
+            return;
+        }
+
+        PluginLog.Info($"{this._Name} | Sending shortcut: {this.defaultShortcut}");
+        try
+        {
+            var shortcut = String.IsNullOrEmpty(this.defaultShortcut) ? this.defaultShortcut : this.defaultShortcut;
+            if (shortcut == "None___0______")
             {
-                // Use the built-in KeyboardShortcut command
-                var shortcut = String.IsNullOrEmpty(this.defaultShortcut) ? this.defaultShortcut : this.defaultShortcut;
-                if (shortcut == "None___0______")
-                {
-                    shortcut = this.defaultShortcut;
-                }
+                shortcut = this.defaultShortcut;
+            }
 
 
-                var letter = ShortcutHelper.GetChar(shortcut);
-                if (letter != '⍼')
-                {
-                    this.Plugin.ClientApplication.SendKeyboardShortcut(letter, ShortcutHelper.GetModifiers(shortcut));
-                    PluginLog.Info($"Sent shortcut: {letter} + {ShortcutHelper.GetModifiers(shortcut)}");
-                }
-                else
-                {
-                    this.Plugin.ClientApplication.SendKeyboardShortcut(ShortcutHelper.GetVirtualKeyCode(shortcut),
-                        ShortcutHelper.GetModifiers(shortcut));
-                    PluginLog.Info(
-                        $"Sent shortcut: {ShortcutHelper.GetVirtualKeyCode(shortcut)} + {ShortcutHelper.GetModifiers(shortcut)}");
-                }
-                
-            }
-            catch (Exception ex)
+            var letter = ShortcutHelper.GetChar(shortcut);
+            if (letter != '⍼')
             {
-                PluginLog.Error($"Failed: {ex.Message}");
+                this.Plugin.ClientApplication.SendKeyboardShortcut(letter, ShortcutHelper.GetModifiers(shortcut));
+                PluginLog.Info($"Sent shortcut: {letter} + {ShortcutHelper.GetModifiers(shortcut)}");
             }
+            else
+            {
+                this.Plugin.ClientApplication.SendKeyboardShortcut(ShortcutHelper.GetVirtualKeyCode(shortcut),
+                    ShortcutHelper.GetModifiers(shortcut));
+                PluginLog.Info(
+                    $"Sent shortcut: {ShortcutHelper.GetVirtualKeyCode(shortcut)} + {ShortcutHelper.GetModifiers(shortcut)}");
+            }
+            
+        }
+        catch (Exception ex)
+        {
+            PluginLog.Error($"Failed: {ex.Message}");
+        }
     }
 }
