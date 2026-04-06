@@ -34,7 +34,7 @@ public static class PowerToysConnector
             {
                 settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "Shortcut Guide", "settings.json");
             }
-            else if (name == "MouseHighlighter" || name == "MousePointerCrosshairs" || name == "MouseJump" || name == "CursorWrap")
+            else if (name == "MouseHighlighter" || name == "MousePointerCrosshairs" || name == "MouseJump")
             {
                 settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "MouseUtils", "settings.json");
             }
@@ -216,6 +216,10 @@ public static class PowerToysConnector
                     if (val.TryGetProperty("value", out var v))
                         shortcutObj = v.Deserialize<ActivationShortcut>();
                 }
+            }
+            else if (name == "CursorWrap" && settings?.Properties?.activation_shortcut != null)
+            {
+                shortcutObj = settings.Properties.activation_shortcut;
             }
             else if (settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
             {

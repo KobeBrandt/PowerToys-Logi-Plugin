@@ -48,4 +48,7 @@ public class SettingsProperties
 
     [JsonPropertyName("thumbnail-hotkey")]
     public SettingValue<ActivationShortcut> ThumbnailHotkey { get; set; }
+
+    [JsonPropertyName("activation_shortcut")]
+    public ActivationShortcut activation_shortcut { get; set; }
 }
