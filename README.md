@@ -14,3 +14,5 @@ To use this plugin you need:
     - Logitech Actions Ring (Can be used on all MX devices)
     - Loupedeck device with recent driver (Not tested)
 
+## Credit
+All icons used are from [PowerToys](https://github.com/microsoft/PowerToys) under the MIT licence
