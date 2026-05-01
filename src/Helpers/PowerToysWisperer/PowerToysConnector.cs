@@ -250,6 +250,17 @@ public static class PowerToysConnector
                     }
                 }
             }
+            else if (name == "PowerDisplay")
+            {
+                if (settings?.Properties?.activation_shortcut != null)
+                {
+                    shortcutObj = settings.Properties.activation_shortcut;
+                }
+                else if (settings?.Properties?.DefaultActivationShortcut != null)
+                {
+                    shortcutObj = settings.Properties.DefaultActivationShortcut;
+                }
+            }
             else if (name == "CursorWrap" && settings?.Properties?.ActivationShortcut.ValueKind == JsonValueKind.Object)
             {
                 if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))

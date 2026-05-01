@@ -8,8 +8,8 @@ using Loupedeck.PowerToysPlugin.Helpers.PowerToysWisperer;
 public abstract class PowerToy : PluginDynamicCommand
 {
     protected String defaultShortcut;
-    private readonly String _Icon;
-    private readonly String _Name;
+    protected readonly String _Icon;
+    protected readonly String _Name;
     private String image;
 
     public PowerToy(String name, String displayName, String shortcut, String groupName = null,
