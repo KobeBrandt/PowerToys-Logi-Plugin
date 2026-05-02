@@ -30,11 +30,52 @@ public static class PowerToysConnector
         }
     }
 
+    public static ModifierKey GetModifierKeyFromSettings(String name)
+    {
+        try
+        {
+            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", name, "settings.json");
+
+            if (!File.Exists(settingsPath))
+            {
+                return ModifierKey.Alt;
+            }
+
+            var jsonContent = File.ReadAllText(settingsPath);
+            var doc = JsonDocument.Parse(jsonContent);
+
+            if (doc.RootElement.TryGetProperty("properties", out var props))
+            {
+                if (props.TryGetProperty("modifierKey", out var modifierProp))
+                {
+                    if (modifierProp.TryGetProperty("value", out var val) && val.TryGetInt32(out var modifierValue))
+                    {
+                        return modifierValue switch
+                        {
+                            0 => ModifierKey.Alt,
+                            1 => ModifierKey.Control,
+                            2 => ModifierKey.Shift,
+                            3 => ModifierKey.Windows,
+                            _ => ModifierKey.Alt
+                        };
+                    }
+                }
+            }
+
+            return ModifierKey.Alt;
+        }
+        catch (Exception ex)
+        {
+            PluginLog.Error(ex, $"{name} | Failed to get modifier key from settings");
+            return ModifierKey.Alt;
+        }
+    }
+
     public static String GetShortcutFromSettings(String name)
     {
         try
         {
-            
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             var settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", name, "settings.json");
 
@@ -58,7 +99,7 @@ public static class PowerToysConnector
             {
                 settingsPath = Path.Combine(localAppData, "Microsoft", "PowerToys", "Shortcut Guide", "settings.json");
             }
-            
+
             if (!File.Exists(settingsPath))
             {
                 PluginLog.Error($"{name} | Settings file not found at {settingsPath}");
@@ -67,8 +108,8 @@ public static class PowerToysConnector
 
             var jsonContent = File.ReadAllText(settingsPath);
             var settings = JsonSerializer.Deserialize<PowerToysSettings>(jsonContent);
-            
-            
+
+
             ActivationShortcut shortcutObj = null;
 
             if (settings?.Properties?.Hotkey?.Value != null)
@@ -80,7 +121,9 @@ public static class PowerToysConnector
                 if (settings.Properties.ActivationShortcut.TryGetProperty("ReparentHotkey", out var val))
                 {
                     if (val.TryGetProperty("value", out var v))
+                    {
                         shortcutObj = v.Deserialize<ActivationShortcut>();
+                    }
                 }
             }
             else if (name == "Reparent" && settings?.Properties?.ReparentHotkey?.Value != null)
@@ -114,12 +157,15 @@ public static class PowerToysConnector
                         {
                             shortcutObj = dpl.Deserialize<ActivationShortcut>();
                         }
-                        else if (props.TryGetProperty("ActivationShortcut", out var act) && act.ValueKind == JsonValueKind.Object)
+                        else if (props.TryGetProperty("ActivationShortcut", out var act) &&
+                                 act.ValueKind == JsonValueKind.Object)
                         {
                             if (act.TryGetProperty("open_powerlauncher", out var val))
                             {
                                 if (val.TryGetProperty("value", out var v))
+                                {
                                     shortcutObj = v.Deserialize<ActivationShortcut>();
+                                }
                             }
                         }
                     }
@@ -130,7 +176,9 @@ public static class PowerToysConnector
                 if (settings.Properties.ActivationShortcut.TryGetProperty("SnapshotHotkey", out var val))
                 {
                     if (val.TryGetProperty("value", out var v))
+                    {
                         shortcutObj = v.Deserialize<ActivationShortcut>();
+                    }
                 }
             }
             else if (name == "AdvancedPaste")
@@ -144,7 +192,9 @@ public static class PowerToysConnector
                     if (settings.Properties.ActivationShortcut.TryGetProperty("AdvancedPasteHotkey", out var val))
                     {
                         if (val.TryGetProperty("value", out var v))
+                        {
                             shortcutObj = v.Deserialize<ActivationShortcut>();
+                        }
                     }
                 }
             }
@@ -180,11 +230,13 @@ public static class PowerToysConnector
                                 shortcutObj = val.Deserialize<ActivationShortcut>();
                             }
                         }
-                        else if (actKey.ValueKind == JsonValueKind.Number && actKey.TryGetInt32(out var code) && code > 0)
+                        else if (actKey.ValueKind == JsonValueKind.Number && actKey.TryGetInt32(out var code) &&
+                                 code > 0)
                         {
                             shortcutObj = new ActivationShortcut { Code = code };
                         }
-                        else if (actKey.ValueKind == JsonValueKind.Number && actKey.TryGetInt32(out var zeroCode) && zeroCode == 0)
+                        else if (actKey.ValueKind == JsonValueKind.Number && actKey.TryGetInt32(out var zeroCode) &&
+                                 zeroCode == 0)
                         {
                             shortcutObj = new ActivationShortcut { Code = 39 };
                         }
@@ -196,7 +248,8 @@ public static class PowerToysConnector
                 var doc = JsonDocument.Parse(jsonContent);
                 if (doc.RootElement.TryGetProperty("properties", out var props))
                 {
-                    if (props.TryGetProperty("fancyzones_editor_hotkey", out var hotkey) && hotkey.ValueKind == JsonValueKind.Object)
+                    if (props.TryGetProperty("fancyzones_editor_hotkey", out var hotkey) &&
+                        hotkey.ValueKind == JsonValueKind.Object)
                     {
                         if (hotkey.TryGetProperty("value", out var v))
                         {
@@ -216,7 +269,9 @@ public static class PowerToysConnector
                     if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))
                     {
                         if (val.TryGetProperty("value", out var v))
+                        {
                             shortcutObj = v.Deserialize<ActivationShortcut>();
+                        }
                     }
                 }
             }
@@ -231,7 +286,9 @@ public static class PowerToysConnector
                     if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))
                     {
                         if (val.TryGetProperty("value", out var v))
+                        {
                             shortcutObj = v.Deserialize<ActivationShortcut>();
+                        }
                     }
                 }
             }
@@ -246,7 +303,9 @@ public static class PowerToysConnector
                     if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))
                     {
                         if (val.TryGetProperty("value", out var v))
+                        {
                             shortcutObj = v.Deserialize<ActivationShortcut>();
+                        }
                     }
                 }
             }
@@ -266,7 +325,9 @@ public static class PowerToysConnector
                 if (settings.Properties.ActivationShortcut.TryGetProperty("ActivationShortcut", out var val))
                 {
                     if (val.TryGetProperty("value", out var v))
+                    {
                         shortcutObj = v.Deserialize<ActivationShortcut>();
+                    }
                 }
             }
             else if (name == "CursorWrap" && settings?.Properties?.activation_shortcut != null)
@@ -296,7 +357,8 @@ public static class PowerToysConnector
                 }
             }
 
-            if (shortcutObj != null && (shortcutObj.Win || shortcutObj.Ctrl || shortcutObj.Alt || shortcutObj.Shift || shortcutObj.Code > 0))
+            if (shortcutObj != null && (shortcutObj.Win || shortcutObj.Ctrl || shortcutObj.Alt || shortcutObj.Shift ||
+                                        shortcutObj.Code > 0))
             {
                 var shortcutStr = "";
 
@@ -378,17 +440,17 @@ public static class PowerToysConnector
                     else
                     {
                         var keyChar = (Char)shortcutObj.Code;
-                        shortcutStr += "Key" + char.ToUpper(keyChar);
+                        shortcutStr += "Key" + Char.ToUpper(keyChar);
                     }
                 }
 
-                if (!string.IsNullOrEmpty(shortcutStr))
+                if (!String.IsNullOrEmpty(shortcutStr))
                 {
                     PluginLog.Info($"{name} | Set shortcut to: {shortcutStr} ");
                     return shortcutStr;
                 }
             }
-            
+
             PluginLog.Error($"{name} | No activation shortcut found");
             return null;
         }

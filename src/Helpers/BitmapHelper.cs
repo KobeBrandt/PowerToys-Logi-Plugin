@@ -10,7 +10,7 @@ public static class BitmapHelper
             using var builder = new BitmapBuilder(imageSize);
             var cw = builder.Width;
             var ch = builder.Height;
-            var dw = (Int32) (cw / scale);
+            var dw = (Int32)(cw / scale);
             var dh = (Int32)(ch / scale);
             var dx = (Int32)((cw - dw) / scale);
             var dy = (Int32)((ch - dh) / scale);

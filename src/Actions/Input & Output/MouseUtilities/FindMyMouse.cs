@@ -9,7 +9,7 @@ public class FindMyMouse : PowerToy
     private Int32 _activationMethod;
 
     public FindMyMouse()
-        : base(name: "FindMyMouse", displayName: "Find My Mouse", shortcut: "", groupName: "Input & Output###Mouse Utilities")
+        : base("FindMyMouse", "Find My Mouse", "", "Input & Output###Mouse Utilities")
     {
     }
 
@@ -36,10 +36,11 @@ public class FindMyMouse : PowerToy
                 break;
             case 3:
                 var shortcut = PowerToysConnector.GetShortcutFromSettings("FindMyMouse");
-                if (!string.IsNullOrEmpty(shortcut))
+                if (!String.IsNullOrEmpty(shortcut))
                 {
                     this.defaultShortcut = shortcut;
                 }
+
                 break;
         }
     }

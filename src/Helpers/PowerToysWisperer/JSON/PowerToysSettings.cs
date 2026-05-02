@@ -4,6 +4,5 @@ using System.Text.Json.Serialization;
 
 public class PowerToysSettings
 {
-    [JsonPropertyName("properties")]
-    public SettingsProperties Properties { get; set; }
+    [JsonPropertyName("properties")] public SettingsProperties Properties { get; set; }
 }
