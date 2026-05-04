@@ -1,4 +1,4 @@
-﻿namespace Loupedeck.PowerToysPlugin.Helpers;
+namespace Loupedeck.WindowsPowerToysPlugin.Helpers;
 
 using System.Text.RegularExpressions;
 
@@ -49,7 +49,7 @@ public static class ShortcutHelper
             return ' ';
         }
 
-        return '⍼';
+        return '?';
     }
 
     public static VirtualKeyCode GetVirtualKeyCode(String shortcut)

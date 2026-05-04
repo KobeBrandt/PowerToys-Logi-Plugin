@@ -1,4 +1,4 @@
-namespace Loupedeck.PowerToysPlugin.Helpers.PowerToysWisperer;
+namespace Loupedeck.WindowsPowerToysPlugin.Helpers.PowerToysWisperer;
 
 using System.Text.Json;
 

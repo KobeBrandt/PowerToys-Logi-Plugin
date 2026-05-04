@@ -1,4 +1,4 @@
-namespace PowerToysPlugin.Input___Output;
+namespace Loupedeck.WindowsPowerToysPlugin.Input___Output;
 
 public class PowerDisplay : PowerToy
 {

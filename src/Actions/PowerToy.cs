@@ -1,9 +1,9 @@
-﻿namespace PowerToysPlugin;
+namespace Loupedeck.WindowsPowerToysPlugin;
 
 using Loupedeck;
-using Loupedeck.PowerToysPlugin;
-using Loupedeck.PowerToysPlugin.Helpers;
-using Loupedeck.PowerToysPlugin.Helpers.PowerToysWisperer;
+using Loupedeck.WindowsPowerToysPlugin;
+using Loupedeck.WindowsPowerToysPlugin.Helpers;
+using Loupedeck.WindowsPowerToysPlugin.Helpers.PowerToysWisperer;
 
 public abstract class PowerToy : PluginDynamicCommand
 {
@@ -82,7 +82,7 @@ public abstract class PowerToy : PluginDynamicCommand
 
 
             var letter = ShortcutHelper.GetChar(shortcut);
-            if (letter != '⍼')
+            if (letter != '?')
             {
                 this.Plugin.ClientApplication.SendKeyboardShortcut(letter, ShortcutHelper.GetModifiers(shortcut));
                 PluginLog.Info($"Sent shortcut: {letter} + {ShortcutHelper.GetModifiers(shortcut)}");
@@ -101,3 +101,4 @@ public abstract class PowerToy : PluginDynamicCommand
         }
     }
 }
+

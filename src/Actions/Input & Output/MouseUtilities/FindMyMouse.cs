@@ -1,8 +1,8 @@
-namespace PowerToysPlugin.Input___Output.MouseUtilities;
+namespace Loupedeck.WindowsPowerToysPlugin.Input___Output.MouseUtilities;
 
 using Loupedeck;
-using Loupedeck.PowerToysPlugin;
-using Loupedeck.PowerToysPlugin.Helpers.PowerToysWisperer;
+using Loupedeck.WindowsPowerToysPlugin;
+using Loupedeck.WindowsPowerToysPlugin.Helpers.PowerToysWisperer;
 
 public class FindMyMouse : PowerToy
 {
@@ -45,3 +45,4 @@ public class FindMyMouse : PowerToy
         }
     }
 }
+

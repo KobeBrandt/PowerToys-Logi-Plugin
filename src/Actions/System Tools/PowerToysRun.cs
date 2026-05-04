@@ -1,8 +1,9 @@
-﻿namespace Loupedeck.PowerToysPlugin.Actions;
+namespace Loupedeck.WindowsPowerToysPlugin.Actions;
 
-using global::PowerToysPlugin;
+using Loupedeck.WindowsPowerToysPlugin;
 
 public class PowerToysRun : PowerToy
 {
     public PowerToysRun() : base("PowerToysRun", "PowerToys Run", "Alt+Space", "System Tools") { }
 }
+

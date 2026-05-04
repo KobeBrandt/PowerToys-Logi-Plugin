@@ -1,4 +1,4 @@
-namespace Loupedeck.PowerToysPlugin;
+namespace Loupedeck.WindowsPowerToysPlugin;
 
 using System.Reflection;
 
@@ -17,8 +17,8 @@ public static class PluginResources
     }
 
     // Retrieves the names of all the resource files in the specified folder.
-    // The parameter `folderName` must be specified as a full path, for example, `Loupedeck.PowerToysPlugin.Resources`.
-    // Returns the full names of the resource files, for example, `Loupedeck.PowerToysPlugin.Resources.Resource.txt`.
+    // The parameter `folderName` must be specified as a full path, for example, `Loupedeck.WindowsPowerToysPlugin.Resources`.
+    // Returns the full names of the resource files, for example, `Loupedeck.WindowsPowerToysPlugin.Resources.Resource.txt`.
     public static String[] GetFilesInFolder(String folderName) => _assembly.GetFilesInFolder(folderName);
 
     // Finds the first resource file with the specified file name.

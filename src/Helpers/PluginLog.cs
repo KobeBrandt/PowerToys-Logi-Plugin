@@ -1,4 +1,4 @@
-namespace Loupedeck.PowerToysPlugin;
+namespace Loupedeck.WindowsPowerToysPlugin;
 
 // A helper class that enables logging from the plugin code.
 

@@ -1,4 +1,4 @@
-﻿namespace Loupedeck.PowerToysPlugin.Helpers;
+namespace Loupedeck.WindowsPowerToysPlugin.Helpers;
 
 public static class BitmapHelper
 {

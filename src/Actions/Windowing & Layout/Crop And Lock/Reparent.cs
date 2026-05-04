@@ -1,4 +1,4 @@
-﻿namespace PowerToysPlugin.Windowing___Layout.Crop_And_Lock;
+namespace Loupedeck.WindowsPowerToysPlugin.Windowing___Layout.Crop_And_Lock;
 
 public class Reparent : PowerToy
 {

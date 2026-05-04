@@ -1,4 +1,4 @@
-namespace PowerToysPlugin.Input___Output.MouseUtilities;
+namespace Loupedeck.WindowsPowerToysPlugin.Input___Output.MouseUtilities;
 
 public class MousePointerCrosshairs : PowerToy
 {
