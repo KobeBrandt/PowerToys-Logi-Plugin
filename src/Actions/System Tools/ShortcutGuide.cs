@@ -1,8 +1,9 @@
-﻿namespace Loupedeck.PowerToysPlugin.Actions;
+namespace Loupedeck.WindowsPowerToysPlugin.Actions;
 
-using global::PowerToysPlugin;
+using Loupedeck.WindowsPowerToysPlugin;
 
 public class ShortcutGuide : PowerToy
 {
     public ShortcutGuide() : base("ShortcutGuide", "Shortcut Guide", "Win+SHIFT+Key/", "System Tools") { }
 }
+

@@ -1,8 +1,9 @@
-﻿namespace Loupedeck.PowerToysPlugin.Actions;
+namespace Loupedeck.WindowsPowerToysPlugin.Actions;
 
-using global::PowerToysPlugin;
+using Loupedeck.WindowsPowerToysPlugin;
 
 public class ColorPicker : PowerToy
 {
     public ColorPicker() : base("ColorPicker", "Color Picker", "Windows+Shift+KeyC", "System Tools") { }
 }
+

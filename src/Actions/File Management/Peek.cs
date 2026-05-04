@@ -1,4 +1,4 @@
-﻿namespace PowerToysPlugin.File_Management;
+namespace Loupedeck.WindowsPowerToysPlugin.File_Management;
 
 public class Peek : PowerToy
 {

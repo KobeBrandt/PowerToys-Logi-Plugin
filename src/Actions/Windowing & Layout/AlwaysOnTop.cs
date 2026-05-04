@@ -1,4 +1,4 @@
-﻿namespace PowerToysPlugin.Windowing___Layout;
+namespace Loupedeck.WindowsPowerToysPlugin.Windowing___Layout;
 
 public class AlwaysOnTop : PowerToy
 {

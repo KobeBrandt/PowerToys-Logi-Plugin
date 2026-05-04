@@ -1,8 +1,9 @@
-﻿namespace Loupedeck.PowerToysPlugin.Actions;
+namespace Loupedeck.WindowsPowerToysPlugin.Actions;
 
-using global::PowerToysPlugin;
+using Loupedeck.WindowsPowerToysPlugin;
 
 public class CommandPalette : PowerToy
 {
     public CommandPalette() : base("CommandPalette", "Command Palette", "Windows+Alt+Space", "System Tools") { }
 }
+

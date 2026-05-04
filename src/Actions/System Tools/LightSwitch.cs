@@ -1,8 +1,9 @@
-﻿namespace Loupedeck.PowerToysPlugin.Actions;
+namespace Loupedeck.WindowsPowerToysPlugin.Actions;
 
-using global::PowerToysPlugin;
+using Loupedeck.WindowsPowerToysPlugin;
 
 public class LightSwitch : PowerToy
 {
     public LightSwitch() : base("LightSwitch", "Light Switch", "Windows+Ctrl+Shift+KeyD", "System Tools") { }
 }
+

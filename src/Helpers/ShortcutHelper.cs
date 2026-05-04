@@ -1,9 +1,6 @@
-﻿namespace Loupedeck.PowerToysPlugin.Helpers;
+namespace Loupedeck.WindowsPowerToysPlugin.Helpers;
 
-using System;
-using System.Linq;
 using System.Text.RegularExpressions;
-using Loupedeck;
 
 public static class ShortcutHelper
 {
@@ -43,7 +40,7 @@ public static class ShortcutHelper
         if (matchKey.Success)
         {
             var key = matchKey.Groups[1].Value[0];
-            return char.ToLower(key);
+            return Char.ToLower(key);
         }
 
         var matchSpace = Regex.Match(shortcut, @"Space");
@@ -52,7 +49,7 @@ public static class ShortcutHelper
             return ' ';
         }
 
-        return '⍼';
+        return '?';
     }
 
     public static VirtualKeyCode GetVirtualKeyCode(String shortcut)

@@ -6,7 +6,7 @@
 type: plugin4
 
 # Name that identifies the plugin.
-name: PowerToys
+name: WindowsPowerToys
 
 # Plugin name that is shown to the user.
 displayName: PowerToys
@@ -15,7 +15,7 @@ displayName: PowerToys
 description: A unofficial plugin that executes the PowerToys shortcuts.
 
 # Name of the plugin library file.
-pluginFileName: PowerToysPlugin.dll
+pluginFileName: WindowsPowerToysPlugin.dll
 
 # Plugin version.
 version: 1.0

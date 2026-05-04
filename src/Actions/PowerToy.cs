@@ -1,20 +1,20 @@
-﻿namespace PowerToysPlugin;
+namespace Loupedeck.WindowsPowerToysPlugin;
 
 using Loupedeck;
-using Loupedeck.PowerToysPlugin;
-using Loupedeck.PowerToysPlugin.Helpers;
-using Loupedeck.PowerToysPlugin.Helpers.PowerToysWisperer;
+using Loupedeck.WindowsPowerToysPlugin;
+using Loupedeck.WindowsPowerToysPlugin.Helpers;
+using Loupedeck.WindowsPowerToysPlugin.Helpers.PowerToysWisperer;
 
 public abstract class PowerToy : PluginDynamicCommand
 {
+    protected readonly String _Icon;
+    protected readonly String _Name;
     protected String defaultShortcut;
-    private readonly String _Icon;
-    private readonly String _Name;
     private String image;
 
     public PowerToy(String name, String displayName, String shortcut, String groupName = null,
         String extraGroupName = null, String icon = null)
-        : base(displayName: displayName, description: "Activate the PowerToy for " + displayName + ".", groupName: groupName)
+        : base(displayName, "Activate the PowerToy for " + displayName + ".", groupName)
     {
         this._Name = name;
         this.defaultShortcut = shortcut;
@@ -48,26 +48,25 @@ public abstract class PowerToy : PluginDynamicCommand
         {
             PluginLog.Error(e, "Failed to find image");
         }
-    
+
         return BitmapHelper.MakeBitmapImage(this.image, imageSize);
     }
-    
-        
+
 
     protected override Boolean OnLoad()
     {
         var settingsShortcut = PowerToysConnector.GetShortcutFromSettings(this._Name);
-        if (!string.IsNullOrEmpty(settingsShortcut))
+        if (!String.IsNullOrEmpty(settingsShortcut))
         {
             this.defaultShortcut = settingsShortcut;
         }
+
         return true;
     }
 
     protected override void RunCommand(String actionParameters)
     {
-
-        if (string.IsNullOrEmpty(this.defaultShortcut))
+        if (String.IsNullOrEmpty(this.defaultShortcut))
         {
             return;
         }
@@ -83,7 +82,7 @@ public abstract class PowerToy : PluginDynamicCommand
 
 
             var letter = ShortcutHelper.GetChar(shortcut);
-            if (letter != '⍼')
+            if (letter != '?')
             {
                 this.Plugin.ClientApplication.SendKeyboardShortcut(letter, ShortcutHelper.GetModifiers(shortcut));
                 PluginLog.Info($"Sent shortcut: {letter} + {ShortcutHelper.GetModifiers(shortcut)}");
@@ -95,7 +94,6 @@ public abstract class PowerToy : PluginDynamicCommand
                 PluginLog.Info(
                     $"Sent shortcut: {ShortcutHelper.GetVirtualKeyCode(shortcut)} + {ShortcutHelper.GetModifiers(shortcut)}");
             }
-            
         }
         catch (Exception ex)
         {
@@ -103,3 +101,4 @@ public abstract class PowerToy : PluginDynamicCommand
         }
     }
 }
+

@@ -1,8 +1,9 @@
-﻿namespace Loupedeck.PowerToysPlugin.Actions;
+namespace Loupedeck.WindowsPowerToysPlugin.Actions;
 
-using global::PowerToysPlugin;
+using Loupedeck.WindowsPowerToysPlugin;
 
 public class ScreenRuler : PowerToy
 {
     public ScreenRuler() : base("ScreenRuler", "Screen Ruler", "Win+CTRL+SHIFT+KeyM", "System Tools") { }
 }
+

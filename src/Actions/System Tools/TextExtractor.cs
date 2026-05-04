@@ -1,8 +1,9 @@
-﻿namespace Loupedeck.PowerToysPlugin.Actions;
+namespace Loupedeck.WindowsPowerToysPlugin.Actions;
 
-using global::PowerToysPlugin;
+using Loupedeck.WindowsPowerToysPlugin;
 
 public class TextExtractor : PowerToy
 {
     public TextExtractor() : base("TextExtractor", "Text Extractor", "Win+SHIFT+KeyT", "System Tools") { }
 }
+
